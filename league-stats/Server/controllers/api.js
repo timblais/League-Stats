@@ -9,22 +9,14 @@ module.exports = {
         let player = await getPlayerInfo.json()
         let playerName = player.name
         let puuid = player.puuid
-        console.log(player)
 
         // Use puuid to search for the recent match history of the player
         let getMatchIdList = await fetch(`https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?type=ranked&start=0&count=5&api_key=${process.env.LOL_API_KEY}`)
         // returns an array of match ids
         let matches = await getMatchIdList.json()
-        console.log(matches)
 
-        // Create Holding objects to house data from matches that we care about
-        let allMatches = []
-        let winMatches = []
-        let lossMatches = []
-
-
-        // Loop over the match ids and send api request to get the info for each match. 
-        await matches.forEach(async matchId => {
+        // Use .map to create an array of stats from each match. callback sends api request for the game details, creates stats object for the details we care about and returns the stats object to the array:
+        let allMatchData = await Promise.all(matches.map(async (matchId) => {
           let getMatchData = await fetch(`https://americas.api.riotgames.com/lol/match/v5/matches/${matchId}?api_key=${process.env.LOL_API_KEY}`)
           let matchData = await getMatchData.json()
 
@@ -176,73 +168,70 @@ module.exports = {
             // "opp_totalTimeSpentDead": opponent['totalTimeSpentDead'],
 
           }
+          return stats;
 
-          // stats["win"] === true ? winMatches.push(stats) : lossMatches.push(stats)
-          allMatches.push(stats)
-          // console.log(allMatches)
-          // console.log(stats)
-        });
+        }));
 
-        let allMatchesComplete = await Promise.all(allMatches)
-        let winMatchesComplete = await Promise.all(winMatches)
-        let lossMatchesComplete = await Promise.all(lossMatches)
+        // Use .filter to separate out wins and losses into separate arrays. Could do the same for role specific filtering in the future, though api rate limit will make it hard to get a large enough sample size without multiple delayed requests
+        let winMatchData = allMatchData.filter(e => e['win'] == true)
+        let lossMatchData = allMatchData.filter(e => e['win'] == false)
 
         // Define objects to house averages to pass to client
         const allAverage = {}
         const winAverage = {}
         const lossAverage ={}
 
-        // foreach loops to run through array of games and add values of each property up in average objects
-        allMatches.forEach(e => {
-            for (let prop in e){
-              if(!allAverage[prop]){
-                allAverage[prop] = e[prop]
+        // for of loops to run through array of games and add values of each property up in average objects
+
+        for (const match of allMatchData){
+          for (const prop in match){
+            if(!allAverage[prop]){
+                allAverage[prop] = match[prop]
               }else{
-                allAverage[prop] += e[prop]
+                allAverage[prop] += match[prop]
               }
-            }
-        });
-
-        winMatches.forEach(e => {
-          for (let prop in e){
-            winAverage[prop] += e[prop]
           }
-        });
+        }
 
-        lossMatches.forEach(e => {
-          for (let prop in e){
-            lossAverage[prop] += e[prop]
+        for (const match of winMatchData){
+          for (const prop in match){
+            if(!winAverage[prop]){
+                winAverage[prop] = match[prop]
+              }else{
+                winAverage[prop] += match[prop]
+              }
           }
-        });
+        }
 
-        // average each object based on array.length
+        for (const match of lossMatchData){
+          for (const prop in match){
+            if(!lossAverage[prop]){
+                lossAverage[prop] = match[prop]
+              }else{
+                lossAverage[prop] += match[prop]
+              }
+          }
+        }
+
+        // average each object based on array.length ie number of games/wins/losses
         for (let prop in allAverage){
-          allAverage[prop] = allAverage[prop] / allMatches.length
+          allAverage[prop] = allAverage[prop] / allMatchData.length
         }
 
         for (let prop in winAverage){
-          winAverage[prop] = winAverage[prop] / winMatches.length
+          winAverage[prop] = winAverage[prop] / winMatchData.length
         }
 
         for (let prop in lossAverage){
-          lossAverage[prop] = lossAverage[prop] / lossMatches.length
+          lossAverage[prop] = lossAverage[prop] / lossMatchData.length
         }
 
-        console.log(allMatchesComplete)
-        console.log(allAverage)
-
-        res.json({fullPlayer: player, allAverage: allAverage});
+        // Finally, respond to the client with the data we want to use on the front end.
+        res.json({fullPlayer: player, allAverage: allAverage, winAverage: winAverage, lossAverage: lossAverage, wins: winMatchData.length, losses: lossMatchData.length});
       } catch (err) {
         console.log(err);
       }
     }
 }
 
-          //Next Steps: fix issues with awaiting results of foreach loop. Like need to change foreach loop to .map or for of loop in order to catch the promises from each of the iterations of the loop
-
-          // maybe something like:
-          // let allMatchesStatsArray = await Promise.all(matches.map(async (match) => {
-          //   // perform existing grab of stats for each match and return the stats object created
-          // }))
-          // Trying to loop over the array and average out the values for each property in each game object, package into another object, and return to the client
 
