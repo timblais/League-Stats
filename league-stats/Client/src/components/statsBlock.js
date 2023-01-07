@@ -1,29 +1,39 @@
-import StatCategory from '../components/StatCategory';
+import StatCategory from './StatCategory';
 
-const StatBlock = ({ key, playerStats}) => {
-    const sections = []
+const StatBlock = ({playerStats, header}) => {
+    
+    if(playerStats === undefined){
+        return;
+    }else{
+        const sections = []
 
-    for (let prop in playerStats){
-        let category = prop;
-        let stats = playerStats[prop];
-
-        sections.push(
-            <StatCategory
-                key = {category}
-                category = {category}
-                stats = {stats}
-            />
+        for (let prop in playerStats){
+            let category = prop;
+            let stats = playerStats[prop];
+    
+            sections.push(
+                <StatCategory
+                    key = {category}
+                    category = {category}
+                    stats = {stats}
+                />
+            )
+        }
+    
+    
+    
+        
+        return (
+            <section>
+                <h2>
+                    {header}
+                </h2>
+                {sections}
+            </section>
         )
     }
-
-
-
     
-    return (
-        <section>
-            {sections}
-        </section>
-    )
+
 }
 
 export default StatBlock

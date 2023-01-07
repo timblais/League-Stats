@@ -1,6 +1,6 @@
 
 
-const StatItem = ({ key, statName, value }) => {
+const StatItem = ({ statName, value }) => {
     return (
         <li>
             <span>
