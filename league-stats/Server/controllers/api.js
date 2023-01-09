@@ -123,11 +123,16 @@ module.exports = {
           return stats;
 
         }));
-        console.log(allMatchData)
 
-        // Use .filter to separate out wins and losses into separate arrays. Could do the same for role specific filtering in the future, though api rate limit will make it hard to get a large enough sample size without multiple delayed requests
-        let winMatchData = allMatchData.filter(e => e['win'] == true)
-        let lossMatchData = allMatchData.filter(e => e['win'] == false)
+        // Use .filter to separate out wins and losses into separate arrays. Could do the same for role specific filtering in the future, though api rate limit will make it hard to get a large enough sample size without multiple delayed requests. Because we will use the data to create averages, .map is used to create a deep copy of each match object so that we don't maintain the reference to the original allMatchData version
+        let winMatchData = allMatchData.filter(e => e['win'] == true).map(match => {
+          return JSON.parse(JSON.stringify(match))
+        })
+        let lossMatchData = allMatchData.filter(e => e['win'] == false).map(match => {
+          return JSON.parse(JSON.stringify(match))
+        })
+
+        console.log(lossMatchData)
 
         // Define objects to house averages to pass to client
         const allAverage = {}
@@ -148,6 +153,8 @@ module.exports = {
               }
           }
         }
+
+
 
         for (const match of winMatchData){
           for (const category in match){
@@ -175,25 +182,32 @@ module.exports = {
           }
         }
 
-        // average each object based on array.length ie number of games/wins/losses
-        for (const category in allAverage){
-          for(const stat in allAverage[category])
-          allAverage[category][stat] = allAverage[category][stat] / allMatchData.length
-        }
-
-        for (const category in winAverage){
-          for(const stat in winAverage[category])
-          winAverage[category][stat] = winAverage[category][stat] / winMatchData.length
-        }
-
-        for (const category in lossAverage){
-          for(const stat in lossAverage[category])
-          lossAverage[category][stat] = lossAverage[category][stat] / lossMatchData.length
-        }
 
         delete allAverage['win']
         delete winAverage['win']
         delete lossAverage['win']
+
+        console.log(allAverage)
+        console.log(winAverage)
+        console.log(lossAverage)
+
+        // average each object based on array.length ie number of games/wins/losses
+        for (const category in allAverage){
+          for(const stat in allAverage[category])
+          allAverage[category][stat] = (allAverage[category][stat] / allMatchData.length).toFixed(2)
+        }
+
+        for (const category in winAverage){
+          for(const stat in winAverage[category])
+          winAverage[category][stat] = (winAverage[category][stat] / winMatchData.length).toFixed(2)
+        }
+
+        for (const category in lossAverage){
+          for(const stat in lossAverage[category])
+          lossAverage[category][stat] = (lossAverage[category][stat] / lossMatchData.length).toFixed(2)
+        }
+
+
 
         // Finally, respond to the client with the data we want to use on the front end.
         res.json({allAverage: allAverage, winAverage: winAverage, lossAverage: lossAverage, wins: winMatchData.length, losses: lossMatchData.length});
