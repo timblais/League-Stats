@@ -24,11 +24,13 @@ const StatBlock = ({playerStats, header}) => {
     
         
         return (
-            <section>
-                <h2>
+            <section className='flex flex-col justify-start items-center w-11/12'>
+                <h2 className='text-2xl'>
                     {header}
                 </h2>
-                {sections}
+                <div className='flex flex-wrap flex-row justify-center items-start w-11/12'>
+                    {sections}
+                </div>
             </section>
         )
     }

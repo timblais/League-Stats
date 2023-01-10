@@ -24,7 +24,7 @@ const PlayerSearch = () => {
       }
     
     return (
-      <div>
+      <div className='flex flex-col justify-start items-center w-full'>
           <form onSubmit={handleSubmit}>
             <input type="text" placeholder="find a player" value={playerName} onChange={(e) => setPlayerName(e.target.value)}></input>
             <button type="submit">Search</button>

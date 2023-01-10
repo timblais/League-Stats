@@ -1,9 +1,9 @@
-import Header from './components/Header'
+import Header from './components/Header';
 import PlayerSearch from './components/PlayerSearch';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App w-full">
       <Header />
       <PlayerSearch />
     </div>

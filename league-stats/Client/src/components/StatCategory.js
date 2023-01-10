@@ -17,8 +17,8 @@ const StatCategory = ({ category, stats }) => {
     }
     
     return (
-        <section>
-            <h3>
+        <section className='flex flex-col justify-start items-center w-1/3'>
+            <h3 className='text-lg'>
                 {category}
             </h3>
             <ul>

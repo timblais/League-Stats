@@ -3,10 +3,10 @@
 const StatItem = ({ statName, value }) => {
     return (
         <li>
-            <span>
+            <span className='p-1 text-sm'>
                 {statName}
             </span>
-            <span>
+            <span className='p-1 text-sm'>
                 {value}
             </span>
         </li>
