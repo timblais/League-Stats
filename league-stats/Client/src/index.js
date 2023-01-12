@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import './index.css';
 import Root from './routes/root';
+import Player from './routes/player'
 import reportWebVitals from './reportWebVitals';
 
 const router = createBrowserRouter([
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <Root />,
   },
+  {
+    path: 'player/:playerSearched',
+    element: <Player />
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
