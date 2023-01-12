@@ -132,7 +132,6 @@ module.exports = {
           return JSON.parse(JSON.stringify(match))
         })
 
-        console.log(lossMatchData)
 
         // Define objects to house averages to pass to client
         const allAverage = {}
@@ -187,9 +186,6 @@ module.exports = {
         delete winAverage['win']
         delete lossAverage['win']
 
-        console.log(allAverage)
-        console.log(winAverage)
-        console.log(lossAverage)
 
         // average each object based on array.length ie number of games/wins/losses
         for (const category in allAverage){
@@ -207,7 +203,7 @@ module.exports = {
           lossAverage[category][stat] = (lossAverage[category][stat] / lossMatchData.length).toFixed(2)
         }
 
-
+        console.log(allAverage['KDA'])
 
         // Finally, respond to the client with the data we want to use on the front end.
         res.json({allAverage: allAverage, winAverage: winAverage, lossAverage: lossAverage, wins: winMatchData.length, losses: lossMatchData.length});
