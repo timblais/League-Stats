@@ -206,7 +206,7 @@ module.exports = {
         console.log(allAverage['KDA'])
 
         // Finally, respond to the client with the data we want to use on the front end.
-        res.json({allAverage: allAverage, winAverage: winAverage, lossAverage: lossAverage, wins: winMatchData.length, losses: lossMatchData.length});
+        res.json({playerName: playerName, allAverage: allAverage, winAverage: winAverage, lossAverage: lossAverage, wins: winMatchData.length, losses: lossMatchData.length});
       } catch (err) {
         console.log(err);
       }
