@@ -3,7 +3,8 @@ import StatsBlock from './StatsBlock';
 
 
 const PlayerSearch = () => {
-    const [playerName, setPlayerName] = useState("");
+    const [findPlayer, setFindPlayer] = useState('')
+    const [playerName, setPlayerName] = useState(undefined);
     const [allStats, setAllStats] = useState(undefined);
     const [winStats, setWinStats] = useState(undefined);
     const [lossStats, setLossStats] = useState(undefined);
@@ -11,24 +12,32 @@ const PlayerSearch = () => {
     const [losses, setLosses] = useState(undefined);
 
 
+
+
     const handleSubmit = async (event) => {
         event.preventDefault(); // prevents refresh of the page with submit of the form
-        const response = await fetch(`/api/${playerName}`)
+        const response = await fetch(`/api/${findPlayer}`)
         const json = await response.json()
+        setPlayerName(json['playerName'])
         setAllStats(json['allAverage'])
         setWinStats(json['winAverage'])
         setLossStats(json['lossAverage'])
         setWins(json['wins'])
         setLosses(json['losses'])
         console.log(json)
+        event.target.reset()
       }
     
     return (
-      <div className='flex flex-col justify-start items-center w-full'>
+      <div className='flex flex-col justify-start items-center w-full h-full'>
           <form onSubmit={handleSubmit}>
-            <input type="text" placeholder="find a player" value={playerName} onChange={(e) => setPlayerName(e.target.value)}></input>
+            <input type="text" placeholder='Find a player' onChange={(e) => setFindPlayer(e.target.value)}></input>
             <button type="submit">Search</button>
           </form>
+
+          <h1>
+            {playerName}
+          </h1>
 
           <StatsBlock 
               key = {`${playerName}All`}

@@ -9,7 +9,7 @@ const Player = () => {
 
     console.log(playerSearched)
     
-    // const [playerName, setPlayerName] = useState("");
+    const [playerName, setPlayerName] = useState(null);
     const [allStats, setAllStats] = useState(undefined);
     const [winStats, setWinStats] = useState(undefined);
     const [lossStats, setLossStats] = useState(undefined);
@@ -23,6 +23,7 @@ const Player = () => {
             console.log(`I have ${player}`)
             const response = await fetch(`/api/${player}`)
             const json = await response.json()
+            setPlayerName(json['playerName'])
             setAllStats(json['allAverage'])
             setWinStats(json['winAverage'])
             setLossStats(json['lossAverage'])
@@ -34,22 +35,17 @@ const Player = () => {
         }
     }
 
-    getPlayer(playerSearched)
+    if(!playerName){
+        getPlayer(playerSearched)
+    }
 
-    // const handleSubmit = async (event) => {
-    //     event.preventDefault(); // prevents refresh of the page with submit of the form
-    //     const response = await fetch(`/api/${playerName}`)
-    //     const json = await response.json()
-    //     setAllStats(json['allAverage'])
-    //     setWinStats(json['winAverage'])
-    //     setLossStats(json['lossAverage'])
-    //     setWins(json['wins'])
-    //     setLosses(json['losses'])
-    //     console.log(json)
-    //   }
     
     return (
       <div className='flex flex-col justify-start items-center w-full'>
+
+            <h1>
+                {playerName}
+            </h1>
 
           <StatsBlock 
               key = {`${playerSearched}All`}
