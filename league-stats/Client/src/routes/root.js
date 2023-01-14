@@ -7,7 +7,10 @@ function Root() {
         <Header
         page = "Home" 
         />
-        <PlayerSearch />
+        <div className='flex flex-col justify-center items-center h-96 max-h-screen w-full'>
+          <PlayerSearch />
+        </div>
+
       </div>
     );
   }

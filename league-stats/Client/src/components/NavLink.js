@@ -4,7 +4,7 @@ const NavLink = ({ text, link }) => {
     const url = `/${link}`
     
     return (
-      <span>
+      <span className="m-5 text-xl">
         <Link to={url}>
           {text}
         </Link>
