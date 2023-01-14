@@ -1,10 +1,14 @@
-const NavLink = ({ text }) => {
-    const link = `/${text}`
+import { Link } from "react-router-dom"
+
+const NavLink = ({ text, link }) => {
+    const url = `/${link}`
     
     return (
-      <a href={link}>
+      <span>
+        <Link to={url}>
           {text}
-      </a>
+        </Link>
+      </span>
     )
   }
   

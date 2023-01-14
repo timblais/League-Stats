@@ -3,7 +3,10 @@ import NavLink from '../components/NavLink'
 const Nav = () => {
   return (
     <nav>
-        <NavLink text='Home'/>
+        <NavLink 
+        text = 'LOL Stats'
+        link = ''
+        />
     </nav>
   )
 }

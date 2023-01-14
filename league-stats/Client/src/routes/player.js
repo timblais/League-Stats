@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import StatsBlock from '../components/StatsBlock';
+import Header from '../components/Header';
 
 
 const Player = () => {
@@ -35,34 +36,37 @@ const Player = () => {
         }
     }
 
-    if(!playerName){
-        getPlayer(playerSearched)
-    }
+    getPlayer(playerSearched)
 
     
     return (
-      <div className='flex flex-col justify-start items-center w-full'>
+      <div>
+        <Header />
+        <div className='flex flex-col justify-start items-center w-full'>
 
-            <h1>
-                {playerName}
-            </h1>
+                <h1>
+                    {playerName}
+                </h1>
 
-          <StatsBlock 
-              key = {`${playerSearched}All`}
-              header = {`${wins + losses} Game Average`}
-              playerStats = {allStats} 
-          />
-          <StatsBlock 
-              key = {`${playerSearched}Wins`}
-              header = {`${wins} Win Average`}
-              playerStats = {winStats} 
-          />
-          <StatsBlock 
-              key = {`${playerSearched}Losses`}
-              header = {`${losses} Loss Average`}
-              playerStats = {lossStats} 
-          />
+            <StatsBlock 
+                key = {`${playerSearched}All`}
+                header = {`${wins + losses} Game Average`}
+                playerStats = {allStats} 
+            />
+            <StatsBlock 
+                key = {`${playerSearched}Wins`}
+                header = {`${wins} Win Average`}
+                playerStats = {winStats} 
+            />
+            <StatsBlock 
+                key = {`${playerSearched}Losses`}
+                header = {`${losses} Loss Average`}
+                playerStats = {lossStats} 
+            />
+        </div>
       </div>
+      
+
 
 
     )
