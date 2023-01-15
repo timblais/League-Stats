@@ -190,11 +190,25 @@ module.exports = {
           lossAverage[category][stat] = (lossAverage[category][stat] / lossMatchData.length).toFixed(2)
         }
 
+
+        // Update average stats for percentages to convert to percentage display instead of decimal
         allAverage['K/D/A and Damage']['Kill Participation'] = `${(allAverage['K/D/A and Damage']['Kill Participation'] * 100).toFixed(0)}%`
         allAverage['K/D/A and Damage']['Kill Participation Difference'] = `${(allAverage['K/D/A and Damage']['Kill Participation Difference'] * 100).toFixed(0)}%`
         allAverage['K/D/A and Damage']['Team Damage Dealt'] = `${(allAverage['K/D/A and Damage']['Team Damage Dealt'] * 100).toFixed(0)}%`
         allAverage['Miscellaneous/Crowd Control']['First Blood Assist'] = `${(allAverage['Miscellaneous/Crowd Control']['First Blood Assist'] * 100).toFixed(0)}%`
         allAverage['Miscellaneous/Crowd Control']['First Blood Kill'] = `${(allAverage['Miscellaneous/Crowd Control']['First Blood Kill'] * 100).toFixed(0)}%`
+
+        winAverage['K/D/A and Damage']['Kill Participation'] = `${(winAverage['K/D/A and Damage']['Kill Participation'] * 100).toFixed(0)}%`
+        winAverage['K/D/A and Damage']['Kill Participation Difference'] = `${(winAverage['K/D/A and Damage']['Kill Participation Difference'] * 100).toFixed(0)}%`
+        winAverage['K/D/A and Damage']['Team Damage Dealt'] = `${(winAverage['K/D/A and Damage']['Team Damage Dealt'] * 100).toFixed(0)}%`
+        winAverage['Miscellaneous/Crowd Control']['First Blood Assist'] = `${(winAverage['Miscellaneous/Crowd Control']['First Blood Assist'] * 100).toFixed(0)}%`
+        winAverage['Miscellaneous/Crowd Control']['First Blood Kill'] = `${(winAverage['Miscellaneous/Crowd Control']['First Blood Kill'] * 100).toFixed(0)}%`
+
+        lossAverage['K/D/A and Damage']['Kill Participation'] = `${(lossAverage['K/D/A and Damage']['Kill Participation'] * 100).toFixed(0)}%`
+        lossAverage['K/D/A and Damage']['Kill Participation Difference'] = `${(lossAverage['K/D/A and Damage']['Kill Participation Difference'] * 100).toFixed(0)}%`
+        lossAverage['K/D/A and Damage']['Team Damage Dealt'] = `${(lossAverage['K/D/A and Damage']['Team Damage Dealt'] * 100).toFixed(0)}%`
+        lossAverage['Miscellaneous/Crowd Control']['First Blood Assist'] = `${(lossAverage['Miscellaneous/Crowd Control']['First Blood Assist'] * 100).toFixed(0)}%`
+        lossAverage['Miscellaneous/Crowd Control']['First Blood Kill'] = `${(lossAverage['Miscellaneous/Crowd Control']['First Blood Kill'] * 100).toFixed(0)}%`
 
         console.log(allAverage['K/D/A and Damage'])
 
