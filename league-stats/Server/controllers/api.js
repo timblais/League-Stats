@@ -44,80 +44,67 @@ module.exports = {
           let stats = {
             "win": playerGameDetails['win'],
 
-            'KDA': {
-              "kills": playerGameDetails['kills'],
-              "deaths": playerGameDetails['deaths'],
-              "assists": playerGameDetails['assists'],
-              "takedowns": playerGameDetails['challenges']['takedowns'],
-              "kda": playerGameDetails['challenges']['kda'],
-              'diff_kda': playerGameDetails['challenges']['killParticipation'] - opponent['challenges']['killParticipation'],
-              "killParticipation": playerGameDetails['challenges']['killParticipation'],
-              "diff_kp": playerGameDetails['challenges']['killParticipation'] - opponent['challenges']['killParticipation'],
-            },
-
-            'Damage': {
-              "teamDamagePercentage": playerGameDetails['challenges']['teamDamagePercentage'],
-              "damagePerMinute": playerGameDetails['challenges']['damagePerMinute'],
-              "damageTakenOnTeamPercentage": playerGameDetails['challenges']['damageTakenOnTeamPercentage'],
-              "totalDamageDealt": playerGameDetails['totalDamageDealt'],
-              "totalDamageDealtToChampions": playerGameDetails['totalDamageDealtToChampions'],
-              "diff_champDamage": playerGameDetails['totalDamageDealtToChampions'] - opponent['totalDamageDealtToChampions'],
+            'K/D/A and Damage': {
+              "Kills": playerGameDetails['kills'],
+              "Deaths": playerGameDetails['deaths'],
+              "Assists": playerGameDetails['assists'],
+              "Takedowns": playerGameDetails['challenges']['takedowns'],
+              "K/D/A": playerGameDetails['challenges']['kda'],
+              'K/D/A Difference': playerGameDetails['challenges']['killParticipation'] - opponent['challenges']['killParticipation'],
+              "Kill Participation": playerGameDetails['challenges']['killParticipation'],
+              "Kill Participation Difference": playerGameDetails['challenges']['killParticipation'] - opponent['challenges']['killParticipation'],
+              "Team Damage Dealt": playerGameDetails['challenges']['teamDamagePercentage'],
+              "Damage Per Minute": playerGameDetails['challenges']['damagePerMinute'],
+              "Team Damage Taken": playerGameDetails['challenges']['damageTakenOnTeamPercentage'],
+              "Total Damage Dealt": playerGameDetails['totalDamageDealt'],
+              "Champion Damage Dealt": playerGameDetails['totalDamageDealtToChampions'],
+              "Champion Damage Difference": playerGameDetails['totalDamageDealtToChampions'] - opponent['totalDamageDealtToChampions'],
             },
             
             'Vision': {
-              "visionScoreAdvantageLaneOpponent": playerGameDetails['challenges']['visionScoreAdvantageLaneOpponent'],
-              "visionScorePerMinute": playerGameDetails['challenges']['visionScorePerMinute'],
-              "diff_visionScorePerMinute": playerGameDetails['challenges']['visionScorePerMinute'] - opponent['challenges']['visionScorePerMinute'],
-              "wardTakedowns": playerGameDetails['challenges']['wardTakedowns'],
-              "diff_wardTakedowns": playerGameDetails['challenges']['wardTakedowns'] - opponent['challenges']['wardTakedowns'],
-              "wardTakedownsBefore20M": playerGameDetails['challenges']['wardTakedownsBefore20M'],
-              "wardsGuarded": playerGameDetails['challenges']['wardsGuarded'],
-              "controlWardTimeCoverageInRiverOrEnemyHalf": playerGameDetails['challenges']['controlWardTimeCoverageInRiverOrEnemyHalf'],
-              "visionScore": playerGameDetails['visionScore'],
-              "diff_visionScore": playerGameDetails['visionScore'] - opponent['visionScore'],
-              "visionWardsBoughtInGame": playerGameDetails['visionWardsBoughtInGame'],
-              "diff_visionWardsBoughtInGame": playerGameDetails['visionWardsBoughtInGame'] - opponent['visionWardsBoughtInGame'],
-              "wardsKilled": playerGameDetails['wardsKilled'],
-              "diff_wardsKilled": playerGameDetails["wardsKilled"] - opponent['wardsKilled'],
-              "wardsPlaced": playerGameDetails['wardsPlaced'],
-              "diff_wardsPlaced": playerGameDetails["wardsPlaced"] - opponent["wardsPlaced"],
-              "controlWardsPlaced": playerGameDetails['challenges']['controlWardsPlaced'],
-              "diff_controlWardsPlaced": playerGameDetails['challenges']['controlWardsPlaced'] - opponent['challenges']['controlWardsPlaced'],
-              "stealthWardsPlaced": playerGameDetails['challenges']['stealthWardsPlaced'],
-              "diff_stealthWardsPlaced": playerGameDetails['challenges']['stealthWardsPlaced'] - opponent['challenges']['stealthWardsPlaced'],
-            },
-
-            'Crowd Control': {
-              "enemyChampionImmobilizations": playerGameDetails['challenges']['enemyChampionImmobilizations'],
-              "timeCCingOthers": playerGameDetails['timeCCingOthers'],
-              "totalTimeCCDealt": playerGameDetails['totalTimeCCDealt'],  
+              "Vision Score Per Minute": playerGameDetails['challenges']['visionScorePerMinute'],
+              "Vision Score/Min Difference": playerGameDetails['challenges']['visionScorePerMinute'] - opponent['challenges']['visionScorePerMinute'],
+              "Total Vision Score": playerGameDetails['visionScore'],
+              "Vision Score Difference": playerGameDetails['visionScore'] - opponent['visionScore'],
+              "Wards Killed": playerGameDetails['wardsKilled'],
+              "Wards Killed Difference": playerGameDetails["wardsKilled"] - opponent['wardsKilled'],
+              "Wards Placed": playerGameDetails['wardsPlaced'],
+              "Wards Placed Difference": playerGameDetails["wardsPlaced"] - opponent["wardsPlaced"],
+              "Control Wards Purchased": playerGameDetails['visionWardsBoughtInGame'],
+              "Control Wards Purchased Difference": playerGameDetails['visionWardsBoughtInGame'] - opponent['visionWardsBoughtInGame'],
+              "Control Wards Placed": playerGameDetails['challenges']['controlWardsPlaced'],
+              "Control Wards Placed Difference": playerGameDetails['challenges']['controlWardsPlaced'] - opponent['challenges']['controlWardsPlaced'],
+              "Stealth Wards Placed": playerGameDetails['challenges']['stealthWardsPlaced'],
+              "Stealth Wards Difference": playerGameDetails['challenges']['stealthWardsPlaced'] - opponent['challenges']['stealthWardsPlaced'],
             },
 
             'Gold and CS': {
-              "enemyJungleMonsterKills": playerGameDetails['challenges']['enemyJungleMonsterKills'],
-              "goldPerMinute": playerGameDetails['challenges']['goldPerMinute'],
-              "diff_goldPerMinute": playerGameDetails['challenges']['goldPerMinute'] - opponent['challenges']['goldPerMinute'],
-              "jungleCsBefore10Minutes": playerGameDetails['challenges']['jungleCsBefore10Minutes'],
-              "diff_jungleCsBefore10Minutes": playerGameDetails['challenges']['jungleCsBefore10Minutes'] - opponent['challenges']['jungleCsBefore10Minutes'],
-              "laneMinionsFirst10Minutes": playerGameDetails['challenges']['laneMinionsFirst10Minutes'],
-              "diff_laneMinionsFirst10Minutes": playerGameDetails['challenges']['laneMinionsFirst10Minutes'] - opponent['challenges']['laneMinionsFirst10Minutes'],
-              "maxCsAdvantageOnLaneOpponent": playerGameDetails['challenges']['maxCsAdvantageOnLaneOpponent'],
-              "diff_maxCsAdvantage": playerGameDetails['challenges']['maxCsAdvantageOnLaneOpponent'] >= opponent['challenges']['maxCsAdvantageOnLaneOpponent'] ? playerGameDetails['challenges']['maxCsAdvantageOnLaneOpponent'] : opponent['challenges']['maxCsAdvantageOnLaneOpponent'] * -1,
-              "maxLevelLeadLaneOpponent": playerGameDetails['challenges']['maxLevelLeadLaneOpponent'],
-              "diff_maxLevelLead": playerGameDetails['challenges']['maxLevelLeadLaneOpponent'] >= opponent['challenges']['maxLevelLeadLaneOpponent'] ? playerGameDetails['challenges']['maxLevelLeadLaneOpponent'] : opponent['challenges']['maxLevelLeadLaneOpponent'] * -1,
-              "goldEarned": playerGameDetails['goldEarned'],
-              "diff_goldEarned": playerGameDetails["goldEarned"] - opponent["goldEarned"],
-              "goldSpent": playerGameDetails['goldSpent'],
+              "Gold Per Minute": playerGameDetails['challenges']['goldPerMinute'],
+              "Gold Per Minute Difference": playerGameDetails['challenges']['goldPerMinute'] - opponent['challenges']['goldPerMinute'],
+              "Gold Earned": playerGameDetails['goldEarned'],
+              "Gold Earned Difference": playerGameDetails["goldEarned"] - opponent["goldEarned"],
+              "Gold Spent": playerGameDetails['goldSpent'],
+              "CS at 10 Minutes": playerGameDetails['challenges']['laneMinionsFirst10Minutes'],
+              "CS at 10 Minutes Difference": playerGameDetails['challenges']['laneMinionsFirst10Minutes'] - opponent['challenges']['laneMinionsFirst10Minutes'],
+              "Max CS Advantage vs Opponent": playerGameDetails['challenges']['maxCsAdvantageOnLaneOpponent'],
+              "Max CS Advantage/Deficit": playerGameDetails['challenges']['maxCsAdvantageOnLaneOpponent'] >= opponent['challenges']['maxCsAdvantageOnLaneOpponent'] ? playerGameDetails['challenges']['maxCsAdvantageOnLaneOpponent'] : opponent['challenges']['maxCsAdvantageOnLaneOpponent'] * -1,
+              "Max Level Lead vs Opponent": playerGameDetails['challenges']['maxLevelLeadLaneOpponent'],
+              "Max Level Lead/Deficit": playerGameDetails['challenges']['maxLevelLeadLaneOpponent'] >= opponent['challenges']['maxLevelLeadLaneOpponent'] ? playerGameDetails['challenges']['maxLevelLeadLaneOpponent'] : opponent['challenges']['maxLevelLeadLaneOpponent'] * -1,
+              "Jungle CS at 10 Minutes": playerGameDetails['challenges']['jungleCsBefore10Minutes'],
+              "Jungle Cs at 10 Minutes Difference": playerGameDetails['challenges']['jungleCsBefore10Minutes'] - opponent['challenges']['jungleCsBefore10Minutes'],
+              "Enemy Jungle Monsters Killed": playerGameDetails['challenges']['enemyJungleMonsterKills'],
             },
 
 
-            'Miscellaneous': {
-              "skillshotsDodged": playerGameDetails['challenges']['skillshotsDodged'],
-              "skillshotsHit": playerGameDetails['challenges']['skillshotsHit'],
-              'abilityUses': playerGameDetails['challenges']['abilityUses'],
-              "firstBloodAssist": playerGameDetails['firstBloodAssist'],
-              "firstBloodKill": playerGameDetails['firstBloodKill'],
-              "totalTimeSpentDead": playerGameDetails['totalTimeSpentDead'],
+            'Miscellaneous/Crowd Control': {
+              "Enemy Champion Immobilizations": playerGameDetails['challenges']['enemyChampionImmobilizations'],
+              "Time Applying Crowd Control": playerGameDetails['timeCCingOthers'],
+              "Skillshots Dodged": playerGameDetails['challenges']['skillshotsDodged'],
+              "Skillshots Hit": playerGameDetails['challenges']['skillshotsHit'],
+              'Ability Uses': playerGameDetails['challenges']['abilityUses'],
+              "First Blood Assist": playerGameDetails['firstBloodAssist'],
+              "First Blood Kill": playerGameDetails['firstBloodKill'],
+              "Time Spent Dead (Seconds)": playerGameDetails['totalTimeSpentDead'],
             },
           }
           return stats;
@@ -203,7 +190,13 @@ module.exports = {
           lossAverage[category][stat] = (lossAverage[category][stat] / lossMatchData.length).toFixed(2)
         }
 
-        console.log(allAverage['KDA'])
+        allAverage['K/D/A and Damage']['Kill Participation'] = `${(allAverage['K/D/A and Damage']['Kill Participation'] * 100).toFixed(0)}%`
+        allAverage['K/D/A and Damage']['Kill Participation Difference'] = `${(allAverage['K/D/A and Damage']['Kill Participation Difference'] * 100).toFixed(0)}%`
+        allAverage['K/D/A and Damage']['Team Damage Dealt'] = `${(allAverage['K/D/A and Damage']['Team Damage Dealt'] * 100).toFixed(0)}%`
+        allAverage['Miscellaneous/Crowd Control']['First Blood Assist'] = `${(allAverage['Miscellaneous/Crowd Control']['First Blood Assist'] * 100).toFixed(0)}%`
+        allAverage['Miscellaneous/Crowd Control']['First Blood Kill'] = `${(allAverage['Miscellaneous/Crowd Control']['First Blood Kill'] * 100).toFixed(0)}%`
+
+        console.log(allAverage['K/D/A and Damage'])
 
         // Finally, respond to the client with the data we want to use on the front end.
         res.json({playerName: playerName, allAverage: allAverage, winAverage: winAverage, lossAverage: lossAverage, wins: winMatchData.length, losses: lossMatchData.length});
