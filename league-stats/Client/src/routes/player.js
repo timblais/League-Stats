@@ -44,7 +44,7 @@ const Player = () => {
         <Header />
         <div className='flex flex-col justify-start items-center w-full'>
 
-                <h1>
+                <h1 className='text-2xl font-bold mt-5'>
                     {playerName}
                 </h1>
 

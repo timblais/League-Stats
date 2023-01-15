@@ -9,6 +9,7 @@ const PlayerSearch = () => {
     const handleSubmit = (event) => {
         event.preventDefault(); // prevents refresh of the page with submit of the form
         navigate(`/player/${findPlayer}`)
+        event.target.reset()
  
       }
     
