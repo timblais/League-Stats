@@ -10,6 +10,7 @@ const Player = () => {
 
     console.log(playerSearched)
     
+    const [searchVal, setSearchVal] = useState(null)
     const [playerName, setPlayerName] = useState(null);
     const [allStats, setAllStats] = useState(undefined);
     const [winStats, setWinStats] = useState(undefined);
@@ -30,14 +31,16 @@ const Player = () => {
             setLossStats(json['lossAverage'])
             setWins(json['wins'])
             setLosses(json['losses'])
+            setSearchVal(player)
             console.log(json)
         } catch (error) {
             console.log(error)
         }
     }
-
-    getPlayer(playerSearched)
-
+    
+    if(playerSearched !== searchVal){
+        getPlayer(playerSearched)
+    }
     
     return (
       <div>
